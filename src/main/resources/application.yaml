@@ -3,4 +3,4 @@ spring:
     name: cs-ci
 
 server:
-  port: 8000
+  port: 8010
