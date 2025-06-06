@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class BasicController {
-    @GetMapping
+    @GetMapping("/")
     fun hello(): String {
         return "Hello, world! Service working correctly"
     }
