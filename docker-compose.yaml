@@ -1,0 +1,10 @@
+name: "career-seekers"
+services:
+  ci:
+    image: openjdk:21-jdk-slim
+    container_name: ci
+    ports:
+      - "8000:8000"
+    entrypoint: /bin/bash /home/startup.sh
+    volumes:
+      - ./docker:/home/
