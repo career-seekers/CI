@@ -1,5 +1,7 @@
 #!/bin/bash
-mkdir /app
+mkdir -p /app
+
+dpkg --configure -a
 
 apt-get update && apt-get install -y git
 
