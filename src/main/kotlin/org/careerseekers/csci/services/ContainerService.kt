@@ -9,8 +9,8 @@ class ContainerService {
     @Async
     fun updateContainers(container: String) {
         try {
-            val pb = ProcessBuilder("/usr/bin/docker", "restart", container)
-            pb.inheritIO().start().waitFor()
+            ProcessBuilder("docker-compose", "up", "-d", "--force-recreate", container)
+                .inheritIO().start().waitFor()
         } catch (e: Exception) {
             e.printStackTrace()
         }
