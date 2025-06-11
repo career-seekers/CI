@@ -11,13 +11,27 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/webhook/github")
 class GithubWebhookController {
+    @PostMapping("/ci")
+    fun onPushCI(
+        @RequestBody payload: Map<String, Object>,
+        @RequestHeader("X-GitHub-Event") event: String
+    ): ResponseEntity<String?> {
+        return onPush(payload, event, "ci")
+    }
+
     @PostMapping("/users-service")
-    fun onPushUsers(@RequestBody payload: Map<String, Object>, @RequestHeader("X-GitHub-Event") event: String): ResponseEntity<String?> {
+    fun onPushUsers(
+        @RequestBody payload: Map<String, Object>,
+        @RequestHeader("X-GitHub-Event") event: String
+    ): ResponseEntity<String?> {
         return onPush(payload, event, "users-service")
     }
 
     @PostMapping("/events-service")
-    fun onPushEvents(@RequestBody payload: Map<String, Object>, @RequestHeader("X-GitHub-Event") event: String): ResponseEntity<String?> {
+    fun onPushEvents(
+        @RequestBody payload: Map<String, Object>,
+        @RequestHeader("X-GitHub-Event") event: String
+    ): ResponseEntity<String?> {
         return onPush(payload, event, "events-service")
     }
 
