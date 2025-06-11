@@ -8,3 +8,5 @@ services:
     entrypoint: /bin/bash /home/startup.sh
     volumes:
       - ./docker:/home/
+    env_file:
+      - ./docker/.env
