@@ -9,8 +9,15 @@ class ContainerService {
     @Async
     fun updateContainers(container: String) {
         try {
-            ProcessBuilder("docker", "compose", "up", "-d", "--force-recreate", container)
+            ProcessBuilder("docker-compose", "stop", container)
                 .inheritIO().start().waitFor()
+
+            ProcessBuilder("docker-compose", "rm", "-f", container)
+                .inheritIO().start().waitFor()
+
+            ProcessBuilder("docker-compose", "up", "-d", container)
+                .inheritIO().start().waitFor()
+
         } catch (e: Exception) {
             e.printStackTrace()
         }

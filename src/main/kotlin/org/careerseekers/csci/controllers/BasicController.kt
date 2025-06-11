@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController
 class BasicController {
     @GetMapping("/")
     fun hello(): String {
-        return "Hello, world! Service working correctly. Attempt 5"
+        return "Hello, world! Service working correctly. Attempt 6"
     }
 }
