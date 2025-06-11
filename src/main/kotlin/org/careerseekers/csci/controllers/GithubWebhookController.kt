@@ -1,6 +1,6 @@
 package org.careerseekers.csci.controllers
 
-import org.careerseekers.csci.ContainerService
+import org.careerseekers.csci.services.ContainerService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
