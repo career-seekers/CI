@@ -1,5 +1,6 @@
 package org.careerseekers.csci.controllers
 
+import org.careerseekers.csci.ContainerService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/webhook/github")
-class GithubWebhookController {
+class GithubWebhookController(private val containerService: ContainerService) {
     @PostMapping("/ci")
     fun onPushCI(
         @RequestBody payload: Map<String, Object>,
@@ -40,19 +41,10 @@ class GithubWebhookController {
             val ref = payload["ref"] as String?
 
             if ("refs/heads/main" == ref) {
-                updateContainers(container)
+                containerService.updateContainers(container)
                 return ResponseEntity.ok<String?>("Containers updated")
             }
         }
         return ResponseEntity.ok("No action taken")
-    }
-
-    private fun updateContainers(container: String) {
-        try {
-            val pb = ProcessBuilder("docker", "restart", container)
-            pb.inheritIO().start().waitFor()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 }
